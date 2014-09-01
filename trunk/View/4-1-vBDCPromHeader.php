@@ -1,19 +1,14 @@
 
 <div class="alert alert-warning" role="alert" >
-	<h4>Setup Discount Promotion By Item</h4>
-
+	<h4>Setup Bundle Discount Promotion</h4>
 </div>
-
-
-
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="well">
 				<div class="alert alert-warning" role="alert">
 					<Strong> Add Promotion</Strong>
 				</div>
-				<form id="addDiscPromByItem" name="addDiscPromByItem">
+				<form id="addBDCPromHeader" name="addBDCPromHeader">
 					<table >
 						<tr>
 							<td>Promotion No</td>
@@ -28,7 +23,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Promotion Description</td>
+							<td>Promotion Desc</td>
 							<td colspan="2">
 							<input type="text" class="form-control input-sm" name="PromDesc" id="PromDesc"/>
 							</td>
@@ -77,7 +72,8 @@
 							<td>
 							Branch
 							</td>
-							<td id="branchArea">
+							<td colspan="3">
+								<div  id="branchArea" style="display:inline"></div>
 							<!--
 								<select class="multiSelect" id="branch">
 									<option>All Branch</option>
@@ -85,16 +81,18 @@
 									<option>Branch1</option>
 								</select>
 							-->
+								<div style="display:inline">
+									<input type="checkbox" name="branchAll" id="branchAll" checked value="All"> All Branch 
+								</div>
 							</td>
-							<td>
-								<input type="checkbox" name="branchAll" id="branchAll" checked value="All"> All Branch 
-							</td>
+							
 						</tr>
 						<tr>
 							<td >
 							Sales Team 
 							</td>
-							<td id="salesTeamArea">
+							<td   colspan="3">
+								<div id="salesTeamArea" style="display:inline"></div>
 								<!--
 								<select class="multiSelect" id="salesTeam" multiple="multiple">
 									<option value="All">All Sales Team</option>
@@ -103,16 +101,18 @@
 									<option value="C">Sales Team C</option>
 								</select>
 								-->
-							</td>
-							<td>
+								<div style="display:inline">
 								<input type="checkbox" name="salesTeamsAll" id="salesTeamsAll" checked value="All"> All Sales Team 
+								</div>
 							</td>
+							
 						</tr>
 						<tr>
 							<td>
 							Shop Type
 							</td>
-							<td id="shopTypeArea">
+							<td  colspan="3">
+								<div id="shopTypeArea" style="display:inline"></div>
 								<!--
 								<select class="multiSelect" id="shopType">
 									<option>All ShopType</option>
@@ -120,11 +120,69 @@
 									<option>Shop Type</option>
 								</select>
 								-->
+								<div style="display:inline">
+									<input type="checkbox" name="shopTypeAll" id="shopTypeAll" checked value="All"> All Shop Type 
+								</div>
 							</td>
-							<td>
-								<input type="checkbox" name="shopTypeAll" id="shopTypeAll" checked value="All"> All Shop Type 
-							</td>
+							
 						</tr>
+
+						<tr>
+						<td>Break By</td>
+						<td id="breakByArea" colspan="2">
+							<select name="breakBy" id="breakBy" style="height:26px;">
+								<option value="A">A</option>
+								<option value="Q">Q</option>
+								<option value="LA">LA</option>
+								<option value="LQ">LQ</option>
+							</select>
+						(Q-Quantity  A-Amonut LQ-Loop Quantity  LA-Loop Amonut)
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							Discount For
+						</td>
+						<td  id="disCountForArea" colspan="2">
+							<select  name="disCountFor" id="disCountFor" style="height:26px;">
+								<option value="P" selected>P</option>
+								<option value="B">B</option>
+								
+						
+							</select>
+						
+						(P-Percent B-Baht)
+						</td>
+					</tr>
+					<tr id="DiscountPercentArea">
+						<td>Discount Percent</td>
+						<td colspan="2"><input  class="inputData" type="text" name="DiscPer" id="DiscPer"  value="0"></td>
+					</tr>
+					<tr id="DiscountBathArea" style="display:none;">
+						<td>Discount Bath</td>
+						<td colspan="2"><input  class="inputData" type="text" name="DiscBaht" id="DiscBaht"  value="0"></td>
+					</tr>
+					<tr>
+						<td>
+							Limit Free Qty
+						</td>
+						<td colspan="2">
+							<input type="text" name="limitFreeQty" id="limitFreeQty" value="0">
+							Unit 
+							<div id="unitCodeArea" style="display:inline">
+							<input type="text" name="freeUnitCode" id="freeUnitCode"/>
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							Limit Disc Bath
+						</td>
+						<td colspan="2">
+							<input type="text" name="limitDiscBath" id="limitDiscBath" value="0"/>
+						</td>
+					</tr>
 						
 						
 						
@@ -156,7 +214,7 @@
 		<div class="col-md-12">
 			<div class="well">
 				<div class="alert alert-warning" role="alert">
-					<Strong> List of Discount Promotion By Item</Strong>
+					<Strong> List of Bundle Discount Promotion</Strong>
 				</div>
 
 
@@ -221,145 +279,7 @@
 				<!-- Search end-->
 
 				<div id="showAllData">
-				<!--
-					<table class="table">
-						<thead>
-							<tr >
-								<th>
-								Prom No
-								</th>
-								<th>
-								Prom Decs
-								</th>
-								<th>
-								Start Date
-								</th>
-								<th>
-								End Date
-								</th>
-								<th>
-								Away
-								</th>
-								
-								
-								<th>
-								Manage
-								</th>
-							</tr>
-							<tr>
-								<td>
-								
-								DI0908 
-							
-								</td>
-								<td>
-								Puriku350 ml   
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td></td>
-							
-								
-								
-								<td>
-								<button type="button" class="btn btn-primary btn-xs">Edit </button>
-								<button type="button" class="btn btn-danger btn-xs">Delete </button>
-								<button type="button" class="btn btn-primary btn-xs">Print </button>
-								<a href="2-2-setup-discount-prom-by-item-detail.html" class="addItem">
-								<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-								</a>
-								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-								
-								</td>
-							</tr>
-							<tr>
-								<td>
-								
-								DI520301
-								
-								</td>
-								<td>
-								Tea & Star Promo
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td></td>
-								
-								<td>
-								<button type="button" class="btn btn-primary btn-xs">Edit </button>
-								<button type="button" class="btn btn-danger btn-xs">Delete </button>
-								<button type="button" class="btn btn-primary btn-xs">Print </button>
-								<a href="2-2-setup-discount-prom-by-item-detail.html" class="addItem">
-								<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-								</a>
-								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-								
-								</td>
-							</tr>
-							<tr>
-								<td>
-								
-								DI520501
-								
-								</td>
-								<td>
-								Tea & Star Promo
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td></td>
-								
-								<td>
-								<button type="button" class="btn btn-primary btn-xs">Edit </button>
-								<button type="button" class="btn btn-danger btn-xs">Delete </button>
-								<button type="button" class="btn btn-primary btn-xs">Print </button>
-								<a href="2-2-setup-discount-prom-by-item-detail.html" class="addItem">
-								<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-								</a>
-								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-								
-								</td>
-							</tr>
-							<tr>
-								<td>
-								DI5209
-								</td>
-								<td>
-								Puriku 350 ml   
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td>
-								28/05/2553
-								</td>
-								<td></td>
-								<td>
-								<button type="button" class="btn btn-primary btn-xs">Edit </button>
-								<button type="button" class="btn btn-danger btn-xs">Delete </button>
-								<button type="button" class="btn btn-primary btn-xs">Print </button>
-								<a href="2-2-setup-discount-prom-by-item-detail.html" class="addItem">
-								<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-								</a>
-								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-								
-								</td>
-							</tr>
-						</thead>
-					</table>
-				-->
+				
 				</div><!-- content-->
 			</div>
 		</div>
@@ -458,18 +378,15 @@
 				    	<div class="col-md-5">
 						    <table >
 						    	<tbody>
-									<!--
 									<tr>
 							    		<td colspan="2">
-									
 										Copy Existing Promotion
-										
+										<!--
 										<input type="radio" checked name="newPromotion" id="newPromotion" value="Copy_Existing_Promotion">
-										
+										-->
 										</td>
 							    		
 							    	</tr>
-									-->
 									<!--
 							    	<tr>
 							    		<td><input type="radio"  name="newPromotion" id="newPromotion" value="Blank_Promotion"></td>
@@ -478,7 +395,7 @@
 							    	-->
 							    	<tr>
 							    		<td>Promotion No</td>
-							    		<td><input type="text" id="nPromNo"size="10" name="nPromNo"></td>
+							    		<td><input type="text" id="nPromNo"size="5" name="nPromNo"></td>
 							    	</tr>
 									<tr>
 										<td colspan="2">
@@ -489,8 +406,8 @@
 								
 						    </table>
 							<br style="clear:both">
-							<button type="submit" class="btn btn-primary btn-xs" id="nPromtionSubmit">Copy </button>
-							<button type="reset" class="btn btn-primary btn-xs" id="nCancel">Cancel </button>
+							<button type="submit" class="btn btn-primary btn-xs" id="nPromtionSubmit">Add </button>
+							<button type="reset" class="btn btn-danger btn-xs" id="nCancel">Cancle </button>
 				    	</div>
 				    </div>
 		</div>

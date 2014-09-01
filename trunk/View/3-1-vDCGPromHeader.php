@@ -1,471 +1,371 @@
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+<div class="alert alert-warning" role="alert" >
+	<h4>Setup Discount Promotion By Group</h4>
 
-    <title>Setup Discount Promotion By Group</title>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/blog.css">
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/doc.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="../bootstrap-3.1.1/js/jquery-2.1.1.min.js"></script>
-<script src="../bootstrap-3.1.1/js/bootstrap.min.js"></script>
+</div>
 
 
 
-<link rel="stylesheet" type="text/css" href="../jquery-ui-multiselect/jquery.multiselect.css" />
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../jquery-ui-multiselect/src/jquery.multiselect.js"></script>
 
-
-<script>
-$(document).ready(function(){
-	$(".mutiSelect").multiselect();
-	$(".date").datepicker();
-});
-</script>
-
-  </head>
-
-  <body>
-
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <ul class="nav navbar-nav bg-primary">
-	        <li ><a href="1-1-prod-group-for-prom.html">Product Group for Promotion</a></li>
-	        <li class="dropdown active">
-	          <a href="1-1-prod-group-for-prom.html"class="dropdown-toggle" data-toggle="dropdown">Discount Promotion <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="2-1-setup-discount-prom-by-item.html">Discount Promotion by Item</a></li>
-	            <li><a href="3-1-setup-discount-prom-by-group.html">Discount Promotion by Group</a></li>
-	            <li><a href="3-1-bundle-setup-discount-prom-by-group.html">Discount Promotion by Bundle</a></li>
-	          </ul>
-	        </li>
-	         <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Free Item Promotion <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="4-1-setup-free-item-prom-by-item.html">Free Item Promotion by Item</a></li>
-	            <li><a href="5-1-setup-free-item-prom-by-group.html">Free Item Promotion by Group</a></li>
-	            <li><a href="5-1-bundle-setup-free-item-prom-by-group.html">Free Item Promotion by Bundle</a></li>
-	          </ul>
-	        </li>
-	      </ul>
-        </nav>
-      </div>
-    </div>
-
-    <div class="container">
-<h2>Setup Discount Promotion By Group</h2>
-<h3>Add Promotion</h3>
 	<div class="row">
-		<div class="col-md-8">
-			<table class="table table-bordered">
-				<tr>
-					<td>Promotion No</td>
-					<td>
+		<div class="col-md-12">
+			<div class="well">
+				<div class="alert alert-warning" role="alert">
+					<Strong> Add Promotion</Strong>
+				</div>
+				<form id="addDiscPromByGroup" name="addDiscPromByGroup">
+					<table >
+						<tr>
+							<td>Promotion No</td>
+							<td colspan="2">
+							
+							<div class="row">
+								<div class="col-md-5">
+									<input type="text"  class="form-control input-sm" size="5" name="PromNo" id="PromNo"/>
+								</div>
+							</div>
+							
+							</td>
+						</tr>
+						<tr>
+							<td>Promotion Desc</td>
+							<td colspan="2">
+							<input type="text" class="form-control input-sm" name="PromDesc" id="PromDesc"/>
+							</td>
+								
+						</tr>
 						
-						<input type="productName" />
-					</td>
-				</tr>
-				<tr>
-					<td>Promotion Desc</td>
-					<td>
-					<input type="productName" />
-					</td>
+						<tr>
+							<td>Effective Date</td>
+							<td colspan="2">
+								<input type="text" size="8" class="date" id="StartDate" name="StartDate">
+								&nbsp; To	&nbsp;
+								<input type="text"size="8" class="date" id="EndDate" name="EndDate">
+								
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Priority
+							</td>
+							<td id="priorityArea" colspan="2">
+							
+								<select id="Priority" name="Priority">
+									<option selected>0</option>
+									<option>1</option>
+								</select>
+							
+							</td>
+						</tr>
+
+						<!--
+						<tr>
+							<td>
+								Note
+							</td>
+							<td>
+								<textarea id="note" rows="5" cols="50" ></textarea>
+							</td>
+						</tr>
 						
-				</tr>
-				
-				<tr>
-					<td>Effective Date</td>
-					<td>
-						<input type="text" class="date">
-						&nbsp;
-						<input type="text" class="date">
+						<tr>
+							<td>Alway</td>
+							<td id="alwayArea" colspan="2"><input type="checkbox"  checked id="Alway" name="Alway" value="1"></td>
+						</tr>
+						-->
+						<tr>
+							<td>
+							Branch
+							</td>
+							<td id="branchArea">
+							<!--
+								<select class="multiSelect" id="branch">
+									<option>All Branch</option>
+									<option>Branch0</option>
+									<option>Branch1</option>
+								</select>
+							-->
+							</td>
+							<td>
+								<input type="checkbox" name="branchAll" id="branchAll" checked value="All"> All Branch 
+							</td>
+						</tr>
+						<tr>
+							<td >
+							Sales Team 
+							</td>
+							<td id="salesTeamArea">
+								<!--
+								<select class="multiSelect" id="salesTeam" multiple="multiple">
+									<option value="All">All Sales Team</option>
+									<option value="A">Sales Team A</option>
+									<option value="B">Sales Team B</option>
+									<option value="C">Sales Team C</option>
+								</select>
+								-->
+							</td>
+							<td>
+								<input type="checkbox" name="salesTeamsAll" id="salesTeamsAll" checked value="All"> All Sales Team 
+							</td>
+						</tr>
+						<tr>
+							<td>
+							Shop Type
+							</td>
+							<td id="shopTypeArea">
+								<!--
+								<select class="multiSelect" id="shopType">
+									<option>All ShopType</option>
+									<option>Shop Type</option>
+									<option>Shop Type</option>
+								</select>
+								-->
+							</td>
+							<td>
+								<input type="checkbox" name="shopTypeAll" id="shopTypeAll" checked value="All"> All Shop Type 
+							</td>
+						</tr>
 						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Priority
-					</td>
-					<td>
-						<select>
-							<option>0</option>
-							<option>1</option>
-						</select>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						Note
-					</td>
-					<td>
-						<textarea id="note" rows="5" cols="50"></textarea>
-					</td>
-				</tr>	
-				<tr>
-					<td>
-					Branch
-					</td>
-					<td>
-						<select class="mutiSelect">
-							<option>All Branch</option>
-							<option>Branch0</option>
-							<option>Branch1</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					Van
-					</td>
-					<td>
-						<select class="mutiSelect">
-							<option>All Van</option>
-							<option>Van0</option>
-							<option>Van1</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					Shop Type
-					</td>
-					<td>
-						<select class="mutiSelect">
-							<option>All ShopType</option>
-							<option>Shop Type</option>
-							<option>Shop Type</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Alway</td>
-					<td><input type="checkbox"></td>
-				</tr>
-				
-			</table>
-			
-			
-			
-			
-			<table>
-				<tr>
-					<td>
-		
+						
+						
+					</table>
 					
-					<button type="button" class="btn btn-primary btn-xs">Add </button>
-					&nbsp;
-					<button type="button" class="btn btn-primary btn-xs">Cancel </button>
-				</td>
-				</tr>
-			</table>
+					
+					<br style="clear:both">
+					
+					<table>
+							<tr>
+								<td>
+									<input type="hidden"  id="paramAction" name="paramAction" value="add">
+									<input type="submit" class="btn btn-primary  btn-xs" id="submit" value="Add">
+									<input type="reset" class="btn btn-primary  btn-xs" id="cancel" value="Cancel">
+								</td>
+							</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 		
 	</div>
-	<hr>
 	
-	<h3>List of Discount Promotion By Group</h3>
+
+
+
+
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr >
-						<th>
-						Prom No
-						</th>
-						<th>
-						Prom Decs
-						</th>
-						<th>
-						Start Date
-						</th>
-						<th>
-						End Date
-						</th>
-						<th>
-						Away
-						</th>
-						
-						
-						<th>
-						Manage
-						</th>
-					</tr>
-					<tr>
-						<td>
-						
-						DG0908 
-					
-						</td>
-						<td>
-						Puriku350 ml   
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td></td>
-						
-						
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs">Print </button>
-						<a href="3-2-setup-discount-prom-by-group-detail.html" class="addItem">
-						<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-						</a>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-						
-						</td>
-					</tr>
-					<tr>
-						<td>
-						
-						DG520301
-						
-						</td>
-						<td>
-						Tea & Star Promo
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td></td>
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs">Print </button>
+			<div class="well">
+				<div class="alert alert-warning" role="alert">
+					<Strong> List of Discount Promotion By Group</Strong>
+				</div>
 
-						<a href="3-2-setup-discount-prom-by-group-detail.html" class="addItem">
-						<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-						</a>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-						</td>
-					</tr>
-					<tr>
-						<td>
+
+				<!-- Search start-->
+				<form class="form-inline" role="form" id="search" name="search">
+					  <div class="form-group">
+					  
+					  <table>
 						
-						DG520501
+						<tr>
+							<td> Promotion No:</td>
+							<td id="promNoSearchArea">
+								<select class="form-control input-sm">
+									<option>All</option>
+									<option>DE5233</option>
+								</select>
+							</td>
+							<td id="promDescSearchArea">
+								<!--<input type="text" class="form-control input-sm" id="promDescSearch" placeholder="Promotion Description">-->
+							</td>
+							<td>
+								Start Date:
+							</td>
+							<td>
+								<input type="text" size="8" class="date  " id="StartDateSearch" name="StartDateSearch">
+							</td>
+							<td>
+								End Date:
+							</td>
+							<td>
+								<input type="text"size="8" class="date  " id="EndDateSearch" name="EndDateSearch">
+							</td>
+							<td>
+								 <button type="submit" class="btn btn-primary   btn-xs">Search</button>
+							</td>
+						</tr>
+
+					  </table>
+
+					  <!--
+					  Promotion No:
+						<select class="form-control input-sm">
+							<option>All</option>
+							<option>DE5233</option>
+						</select>
 						
-						</td>
-						<td>
-						Tea & Star Promo
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td></td>
-					
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs">Print </button>
-						<a href="3-2-setup-discount-prom-by-group-detail.html" class="addItem">
-						<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-						</a>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
 						
-						</td>
-					</tr>
-					<tr>
-						<td>
-						
-						DG5209
-						
-						</td>
-						<td>
-						Puriku 350 ml   
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td>
-						28/05/2553
-						</td>
-						<td></td>
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs">Print </button>
-						<a href="3-2-setup-discount-prom-by-group-detail.html" class="addItem">
-						<button type="button" class="btn btn-primary btn-xs">Add Item </button>
-						</a>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-copy-modal-lg">Copy </button>
-						
-						</td>
-					</tr>
-				</thead>
-			</table>
+						<input type="text" class="form-control input-sm" id="groudDesc" placeholder="Promtion Description">
+					  </div>
+						Start Date:
+						<input type="text" size="6" class="date  " id="StartDateSearch" name="StartDateSearch">
+						&nbsp;
+						End Date:
+						<input type="text"size="6" class="date  " id="EndDateSearch" name="EndDateSearch">
+
+					  
+					  <button type="submit" class="btn btn-primary   btn-xs">Search</button>
+					   -->
+
+				</form>
+				<br style="clear:both">
+				<!-- Search end-->
+
+				<div id="showAllData">
+				
+				</div><!-- content-->
+			</div>
 		</div>
 	</div>
  
 </div>
-  
-    <!-- Start  View Step Large modal -->
+ <!--Copy Start Large modal -->
 
 
-<div class="modal fade bs-viewStep-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bs-copy-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="myLargeModalLabel">View Step (G03001 ColaBottle)</h4>
+          <h4 class="modal-title" id="myLargeModalLabel">Copy Promotion</h4>
         </div>
-        <div class="bs-callout bs-callout-info">
-				    <h4>Break By</h4>
-				    <div class="row">
-				    	<div class="col-md-12">
-						    <table class="table">
-								<thead>
-									<tr>
-										
-										<th>Break Qty</th>
-										<th>Unit</th>
-										<th>Break Amt</th>
-										
-										
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										
-										<td>
-										6
-										</td>
-										<td>
-										Pack
-										</td>
-										<td>
-										
-										</td>
-									
-										
-									</tr>
-									<tr>
-										
-										<td>
-										12
-										</td>
-										<td>
-										Pack
-										</td>
-										<td>
-										
-										</td>
-									
-										
-									</tr>
-									<tr>
-										
-										<td>
-										
-										</td>
-										<td>
-										
-										</td>
-										<td>
-										500
-										</td>
-									
-										
-									</tr>
-									
-								</tbody>
-							</table>
-				    	</div>
-				    </div>
-				    
-			</div>
+        
 			
         <div class="modal-body">
-        	<h2>Free Item</h2>
-	        <div class="row">
-			<div class="col-md-12">
-					<table class="table">
-			          	<thead>
-				          	<tr>
-				          		
-				          		
-				          		<th>Free Item Code</th>
-				          		<th>Description</th>
-				          		<th>Free Qty</th>
-				          		<th>Unit</th>
-				          		<th>Gl Account</th>
-				          		
-				          		
-				          	</tr>
-			          	</thead>
-			          	<tbod>
-			          		<tr>
-			          			
-			          			<td>01010006</td>
-			          			<td>กระทิงแดง150มล.</td>
-			          			<td>1</td>
-			          			<td>Piece</td>
-			          			<td></td>
-			          			
-			          		</tr>
-			          		<tr>
-			          		
-			          			<td>01010007</td>
-			          			<td>กระทิงแดง150มล.(พ)</td>
-			          			<td>1</td>
-			          			<td>Piece</td>
-			          			<td></td>
-			          			
-			          		</tr>
-			          		<tr>
-			          			
-			          			<td>01010008</td>
-			          			<td>เรดดิ้โกจิ</td>
-			          			<td>1</td>
-			          			<td>Piece</td>
-			          			<td></td>
-			          			
-			          		</tr>
-			          	</tbod>
-			          </table>
-			</div>
-		</div>
-            <button type="button" class="btn btn-primary btn-xs">OK </button>
+        	<h4>Promotion</h4>
+
+					<div class="row">
+					
+					<div class="col-md-12">
+					
+						<table class="table">
+							<tbody>
+								<tr >
+									<th>
+									Prom No
+									</th>
+									<th>
+									Prom Desc
+									</th>
+									<th>
+									Start Date
+									</th>
+									<th>
+									End Date
+									</th>
+									<!--
+									<th>
+									Away
+									</th>
+									-->
+									<th>
+									Priority
+									</th>
+									
+									
+								</tr>
+								<tr>
+									<td id="cPromNo">
+									
+									DI0908 
+								
+									</td>
+									<td id="cPromDesc">
+									Puriku350 ml
+									</td>
+									<td id="cStartDate">
+									28/05/2553
+									</td>
+									<td id="cEndDate">
+									28/05/2553
+									</td>
+									<!--
+									<td id="cAlway">
+									
+									</td>
+									-->
+									<td id="cPriority">
+									
+									</td>
+									
+									
+									
+								</tr>
+								
+							</tbody>
+						</table>
+
+
+					</div>
+				</div>
+					
+				</div>
+
+
 		
-         
-        
-          
-        </div>
+
+		<form id="addNewPromotion" name="addNewPromotion">
+		<div class="bs-callout bs-callout-info">
+				    <h4>New Promotion</h4>
+				    <div class="row">
+				    	<div class="col-md-5">
+						    <table >
+						    	<tbody>
+									<tr>
+							    		<td colspan="2">
+										Copy Existing Promotion
+										<!--
+										<input type="radio" checked name="newPromotion" id="newPromotion" value="Copy_Existing_Promotion">
+										-->
+										</td>
+							    		
+							    	</tr>
+									<!--
+							    	<tr>
+							    		<td><input type="radio"  name="newPromotion" id="newPromotion" value="Blank_Promotion"></td>
+							    		<td>As Blank Promotion</td>
+							    	</tr>
+							    	-->
+							    	<tr>
+							    		<td>Promotion No</td>
+							    		<td><input type="text" id="nPromNo"size="5" name="nPromNo"></td>
+							    	</tr>
+									<tr>
+										<td colspan="2">
+										
+										</td>
+									</tr>
+						    	</tbody>
+								
+						    </table>
+							<br style="clear:both">
+							<button type="submit" class="btn btn-primary btn-xs" id="nPromtionSubmit">Add </button>
+							<button type="reset" class="btn btn-danger btn-xs" id="nCancel">Cancle </button>
+				    	</div>
+				    </div>
+		</div>
+
+		
+
+		</form>
+
+
+
     </div>
    
   </div>
 </div>
 
-<!-- End View Step Large modal -->
-   	
+<!--Copy End Large modal -->     	
 <!-- Start Large modal -->
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -482,13 +382,11 @@ $(document).ready(function(){
 				    		<tr>
 				    			<th>Prom No</th>
 				    			<th>Prom Desc</th>
-				    			
+				    		
 				    			<th>Break By</th>
 				    			<th>Discount For</th>
 				    			<th>LimitFreeQty</th>
 				    			<th>LimitDiscBaht</th>
-				    			
-				    			
 				    			
 				    		
 				    		</tr>
@@ -497,8 +395,6 @@ $(document).ready(function(){
 					    	<tr>
 					    		<td>DI520301</td>
 					    		<td>Tea & Star Promo</td>
-					    		
-					    
 					    		<td>Q</td>
 					    		<td>B</td>
 					    		
@@ -574,7 +470,7 @@ $(document).ready(function(){
             <button type="button" class="btn btn-primary btn-xs">Add </button>
 			<button type="button" class="btn btn-danger btn-xs">Cancle </button>
           <hr>
-          <h2>List of Step Free Item</h2>
+          <h2>Detail Free Item</h2>
           <table class="table">
           	<thead>
 	          	<tr>
@@ -589,7 +485,7 @@ $(document).ready(function(){
 	          		
 	          	</tr>
           	</thead>
-          	<tbod>
+          	<tbody>
           		<tr>
           			
           			<td>01010006</td>
@@ -626,128 +522,10 @@ $(document).ready(function(){
 							<button type="button" class="btn btn-danger btn-xs ">Delete </button>
           			</td>
           		</tr>
-          	</tbod>
+          	</tbody>
           </table>
           
         </div>
     </div>
    
   </div>
-</div>
-<!-- End Large modal -->
- <!--Copy Start Large modal -->
-
-
-<div class="modal fade bs-copy-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-       <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="myLargeModalLabel">New Promotion</h4>
-        </div>
-        <div class="bs-callout bs-callout-info">
-				    <h4>Detail Promotion</h4>
-				    <div class="row">
-				    	<div class="col-md-5">
-						    <table class="table">
-						    	
-						    	<tbody>
-							    	<tr>
-							    		<td><input type="radio" name="radio1"></td>
-							    		<td>As Blank Promotion</td>
-							    	</tr>
-							    	<tr>
-							    		<td><input type="radio" name="radio1"></td>
-							    		<td>Copy Existing Promotion</td>
-							    		
-							    		
-							    	</tr>
-							    	<tr>
-							    		<td><input type="text" size="5"></td>
-							    		<td>Promotion No</td>
-							    		
-							    		
-							    	</tr>
-							    	
-						    	</tbody>
-						    	
-						    </table>
-				    	</div>
-				    </div>
-				    
-			</div>
-			
-        <div class="modal-body">
-        	<h2>Promotion</h2>
-	        <div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<tbody>
-						<tr >
-							<th>
-							Prom Group No
-							</th>
-							<th>
-							Prom Group Desc
-							</th>
-							<th>
-							Start Date
-							</th>
-							<th>
-							End Date
-							</th>
-							<th>
-							Away
-							</th>
-							
-						</tr>
-						<tr>
-							<td>
-							
-							DG0908 
-						
-							</td>
-							<td>
-							Puriku350 ml
-							</td>
-							<td>
-							28/05/2553
-							</td>
-							<td>
-							28/05/2553
-							</td>
-							<td></td>
-							
-							
-							
-						</tr>
-						
-					</tbody>
-				</table>
-			</div>
-		</div>
-            <button type="button" class="btn btn-primary btn-xs">Add </button>
-			<button type="button" class="btn btn-danger btn-xs">Cancle </button>
-         
-        
-          
-        </div>
-    </div>
-   
-  </div>
-</div>
-
-<!--Copy End Large modal -->
-    
-
-       <div class="blog-footer">
-	      <p>Smart Van BackOffice</p>
-	      <p>
-	        <a href="#">Back to top</a>
-	      </p>
-	    </div>
-
-
-   
-  </body>
-</html>

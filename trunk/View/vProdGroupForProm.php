@@ -4,11 +4,9 @@
 
 
 
-<div class="bs-callout bs-callout-info">
+<div class="alert alert-warning" role="alert" >
 	<h4>Promotion Group</h4>
-	<p>
-เพื่อกำหนดเพิ่มกลุ่มสินค้าที่จะนำไปจัดโปรโมชั่นร่วมกัน<br>
-	</p>
+	
 </div>
 
 <!-- from insert data start-->
@@ -89,7 +87,7 @@
 									</div>
 
 								</td>
-								<td>
+								<td id="groudDescSearchArea">
 								<input type="text" id="groudDescSearch" placeholder="Group Description">
 								</td>
 								<td>

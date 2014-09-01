@@ -15,6 +15,16 @@ $pdf->AddPage();
 include_once("../config.php");
 $paramPromNo=$_GET['paramPromNo'];
 $paramPromType=$_GET['paramPromType'];
+
+if($paramPromType=="DCI"){
+	$titleReport="Discount Promotion By Item Report";
+}else if($paramPromType=="DCG"){
+	$titleReport="Discount Promotion By Group Report";
+}else if($paramPromType=="DCB"){
+	$titleReport="Discount Promotion By Buddle Report";
+}
+
+
 $htmlShowData="";
 
 /*select PromHeader start*/
@@ -28,17 +38,19 @@ and PromType='$paramPromType' ";
 	  exit("Error in SQL");
 	}else{
 		 while (odbc_fetch_row($rs)) {
-			  $PromType=odbc_result($rs,"PromType");
-			  $PromNo=odbc_result($rs,"PromNo");
-			  $PromDesc=odbc_result($rs,"PromDesc");
-			  $StartDate=odbc_result($rs,"StartDate");
-			  $EndDate=odbc_result($rs,"EndDate");
+			  $PromType=iconv("tis-620", "utf-8",odbc_result($rs,"PromType"));
+			  $PromNo=iconv("tis-620", "utf-8",odbc_result($rs,"PromNo"));
+			  $PromDesc=iconv("tis-620", "utf-8",odbc_result($rs,"PromDesc"));
+			  $StartDate=iconv("tis-620", "utf-8",odbc_result($rs,"StartDate"));
+			  $EndDate=iconv("tis-620", "utf-8",odbc_result($rs,"EndDate"));
 		 }
 		 odbc_close($conn);
 	}
 /*select PromHeader end*/
 /*select PromOfShopType start*/
-$sqlShopType="SELECT * FROM PromOfShopType 
+$sqlShopType="SELECT post.*,st.ShopTypeName FROM PromOfShopType post 
+left join ShopType st 
+on post.ShopTypeCode=st.ShopTypeCode
 WHERE PromNo='$paramPromNo'
 and PromType='$paramPromType' ";
 
@@ -49,13 +61,19 @@ $shopType="";
 	}else{
 		$i=0;
 		 while (odbc_fetch_row($rsShopType)) {
-			  $PromType=odbc_result($rsShopType,"PromType");
-			  $PromNo=odbc_result($rsShopType,"PromNo");
-			  $ShopTypeCode=odbc_result($rsShopType,"ShopTypeCode");
+			  $PromType=iconv("tis-620", "utf-8",odbc_result($rsShopType,"PromType"));
+			  $PromNo=iconv("tis-620", "utf-8",odbc_result($rsShopType,"PromNo"));
+			  $ShopTypeCode=iconv("tis-620", "utf-8",odbc_result($rsShopType,"ShopTypeCode"));
+			  $ShopTypeName=iconv("tis-620", "utf-8",odbc_result($rsShopType,"ShopTypeName"));
+			
 			  if($i==0){
-				 $shopType.=$ShopTypeCode;
+				  if($ShopTypeCode=="All"){
+					$shopType="All Shop Type";
+				  }else{
+					$shopType.=$ShopTypeCode."-".$ShopTypeName;
+				  }
 			  }else{
-				 $shopType.=",".$ShopTypeCode;
+				 $shopType.=",".$ShopTypeCode."-".$ShopTypeName;
 			  }
 			 
 			  $i++;
@@ -68,7 +86,7 @@ $shopType="";
 $sqlSalesTeam="SELECT * FROM PromOfSalesTeam 
 WHERE PromNo='$paramPromNo'
 and PromType='$paramPromType' ";
-
+$salesTeam="";
 
 	$rsSalesTeam=odbc_exec($conn,$sqlSalesTeam);
 	if (!$rsSalesTeam) {
@@ -76,13 +94,17 @@ and PromType='$paramPromType' ";
 	}else{
 		$i=0;
 		 while (odbc_fetch_row($rsSalesTeam)) {
-			  $PromType=odbc_result($rsSalesTeam,"PromType");
-			  $PromNo=odbc_result($rsSalesTeam,"PromNo");
-			  $SalesTeam=odbc_result($rsSalesTeam,"SalesTeam");
+			  $PromType=iconv("tis-620", "utf-8",odbc_result($rsSalesTeam,"PromType"));
+			  $PromNo=iconv("tis-620", "utf-8",odbc_result($rsSalesTeam,"PromNo"));
+			  $SalesTeam=iconv("tis-620", "utf-8",odbc_result($rsSalesTeam,"SalesTeam"));
 			  if($i==0){
-				 $SalesTeam.=$SalesTeam;
+				 if($SalesTeam=="All"){
+				  $salesTeam="All Sales Team";
+				 }else{
+				 $salesTeam.=$SalesTeam;
+				 }
 			  }else{
-				 $SalesTeam.=",".$SalesTeam;
+				 $salesTeam.=",".$SalesTeam;
 			  }
 			 
 			  $i++;
@@ -92,24 +114,31 @@ and PromType='$paramPromType' ";
 /*select PromOfShopType end*/
 
 /*select PromOfBranch start*/
-$sqlBranchCode="SELECT * FROM PromOfBranch 
+$sqlBranchCode="SELECT pob.*,b.BranchName FROM PromOfBranch pob
+left join Branch b
+on pob.BranchCode=b.BranchCode
 WHERE PromNo='$paramPromNo'
 and PromType='$paramPromType' ";
 
-
+$branch="";
 	$rsBranchCode=odbc_exec($conn,$sqlBranchCode);
 	if (!$rsBranchCode) {
 	  exit("Error in SQL");
 	}else{
 		$i=0;
 		 while (odbc_fetch_row($rsBranchCode)) {
-			  $PromType=odbc_result($rsBranchCode,"PromType");
-			  $PromNo=odbc_result($rsBranchCode,"PromNo");
-			  $BranchCode=odbc_result($rsBranchCode,"BranchCode");
+			  $PromType=iconv("tis-620", "utf-8",odbc_result($rsBranchCode,"PromType"));
+			  $PromNo=iconv("tis-620", "utf-8",odbc_result($rsBranchCode,"PromNo"));
+			  $BranchCode=iconv("tis-620", "utf-8",odbc_result($rsBranchCode,"BranchCode"));
+			  $BranchName=iconv("tis-620", "utf-8",odbc_result($rsBranchCode,"BranchName"));
 			  if($i==0){
-				 $BranchCode.=$BranchCode;
+				  if($BranchCode=="All"){
+				  $branch="All Branch";
+				  }else{
+				  $branch.=$BranchCode."-".$BranchName;
+				  }
 			  }else{
-				 $BranchCode.=",".$BranchCode;
+				 $branch.=",".$BranchCode."-".$BranchName;
 			  }
 			 
 			  $i++;
@@ -118,32 +147,7 @@ and PromType='$paramPromType' ";
 	}
 /*select PromOfShopType end*/
 
-/*select detail promotion start*/
-$sqlBranchCode="SELECT * FROM PromOfBranch 
-WHERE PromNo='$paramPromNo'
-and PromType='$paramPromType' ";
 
-
-	$rsBranchCode=odbc_exec($conn,$sqlBranchCode);
-	if (!$rsBranchCode) {
-	  exit("Error in SQL");
-	}else{
-		$i=0;
-		 while (odbc_fetch_row($rsBranchCode)) {
-			  $PromType=odbc_result($rsBranchCode,"PromType");
-			  $PromNo=odbc_result($rsBranchCode,"PromNo");
-			  $BranchCode=odbc_result($rsBranchCode,"BranchCode");
-			  if($i==0){
-				 $BranchCode.=$BranchCode;
-			  }else{
-				 $BranchCode.=",".$BranchCode;
-			  }
-			 
-			  $i++;
-		 }
-		 odbc_close($conn);
-	}
-/*select detail promotion end*/
 
 
 
@@ -155,12 +159,13 @@ $sqlPromItem="SELECT pit.*,it.ItemDesc,ps.Step as Step,ps.BreakQty as BreakQty ,
 ps.BreakUnitCode as BreakUnitCode,ps.BreakUnitFactor as BreakUnitFactor,
 ps.BreakAmt as BreakAmt,ps.DiscBaht as DiscBaht,ps.PromStepNote as PromStepNote,ps.DiscPer as DiscPer
 from PromItem pit
-inner join PromStep ps  on pit.PromType=ps.PromType
+left join PromStep ps  on pit.PromType=ps.PromType 
 and pit.PromNo=ps.PromNo
-and pit.PromCode=pit.PromCode
+and pit.PromCode=ps.PromCode
 left join Item it on pit.PromCode=it.ItemCode
 where pit.PromType='$paramPromType'
 AND pit.PromNo='$paramPromNo'
+
 ";
 
 
@@ -170,15 +175,15 @@ AND pit.PromNo='$paramPromNo'
 	}else{
 		$j=0;
 		 while (odbc_fetch_row($rsPromItem)) {
-			  $PromType=odbc_result($rsPromItem,"PromType");
-			  $PromNo=odbc_result($rsPromItem,"PromNo");
-			  $PromCode=odbc_result($rsPromItem,"PromCode");
-			  $ItemDesc=odbc_result($rsPromItem,"ItemDesc");
-			  $BreakBy=odbc_result($rsPromItem,"BreakBy");
-			  $DiscFor=odbc_result($rsPromItem,"DiscFor");
-			  $LimitFreeQty=odbc_result($rsPromItem,"LimitFreeQty");
-			  $FreeUnitCode=odbc_result($rsPromItem,"FreeUnitCode");
-			  $LimitDiscBaht=odbc_result($rsPromItem,"LimitDiscBaht");
+			  $PromType=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"PromType"));
+			  $PromNo=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"PromNo"));
+			  $PromCode=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"PromCode"));
+			  $ItemDesc=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"ItemDesc"));
+			  $BreakBy=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakBy"));
+			  $DiscFor=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"DiscFor"));
+			  $LimitFreeQty=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"LimitFreeQty"));
+			  $FreeUnitCode=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"FreeUnitCode"));
+			  $LimitDiscBaht=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"LimitDiscBaht"));
 
               /*
 			  (Q-Quanlity A-Amonut LQ-Loop Quanlity LA-Loop Amonut)
@@ -186,36 +191,36 @@ AND pit.PromNo='$paramPromNo'
 			  */
 
 			  if($BreakBy=="A" or $BreakBy=="LA"){
-				  $BreakAmt=odbc_result($rsPromItem,"BreakAmt");
-				  $Break=odbc_result($rsPromItem,"BreakAmt");
+				  $BreakAmt=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakAmt"));
+				  $Break=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakAmt"));
 				  
 			  }else{
 
-				  $BreakQty=odbc_result($rsPromItem,"BreakQty");
-				  $Break=odbc_result($rsPromItem,"BreakQty");
+				  $BreakQty=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakQty"));
+				  $Break=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakQty"));
 				 
 			  }
 
 			  if($DiscFor=="B" or $DiscFor=="LB"){
-				  $DiscBaht=odbc_result($rsPromItem,"DiscBaht");
-				  $Disc=odbc_result($rsPromItem,"DiscBaht");
+				  $DiscBaht=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"DiscBaht"));
+				  $Disc=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"DiscBaht"));
 				  
 			  }else{
 
-				  $DiscPer=odbc_result($rsPromItem,"DiscPer");
-				  $Disc=odbc_result($rsPromItem,"DiscPer");
+				  $DiscPer=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"DiscPer"));
+				  $Disc=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"DiscPer"));
 				 
 			  }
 
 
 
-			   $BreakUnitCode=odbc_result($rsPromItem,"BreakUnitCode");
-			   $BreakUnitFactor=odbc_result($rsPromItem,"BreakUnitFactor");
-			   $Step=odbc_result($rsPromItem,"Step");
+			   $BreakUnitCode=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakUnitCode"));
+			   $BreakUnitFactor=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"BreakUnitFactor"));
+			   $Step=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"Step"));
 			  
 			  
 			  
-			  $PromStepNote=odbc_result($rsPromItem,"PromStepNote");
+			  $PromStepNote=iconv("tis-620", "utf-8",odbc_result($rsPromItem,"PromStepNote"));
 			 
 
 
@@ -284,28 +289,28 @@ AND pit.PromNo='$paramPromNo'
 			$htmlData.='<td width="80">';
 			$htmlData.=$ItemDesc.'';
 			$htmlData.='</td>';
-			$htmlData.='<td>';
+			$htmlData.='<td width="30" style="text-align:right; ">';
 			$htmlData.= $Step.'';
 			$htmlData.='</td>';
-			$htmlData.='<td>';
-			$htmlData.=$BreakBy.'';
-			$htmlData.='</td>';
-			$htmlData.='<td>';
+			$htmlData.='<td width="35"  style="text-align:right;">';
 			$htmlData.=$Break.'';
 			$htmlData.='</td>';
+			$htmlData.='<td >';
+			$htmlData.=$BreakUnitCode.'';
+			$htmlData.='</td>';
 			$htmlData.='<td>';
-			$htmlData.= $BreakUnitCode.'';
+			$htmlData.= $BreakBy.'';
 			$htmlData.='</td>';
 			$htmlData.='<td>';
 			$htmlData.=$DiscFor.'';
 			$htmlData.='</td>';
-			$htmlData.='<td>';
+			$htmlData.='<td style="text-align:right;">';
 			$htmlData.=$DiscPer.'';
 			$htmlData.='</td>';
-			$htmlData.='<td> ';
+			$htmlData.='<td style="text-align:right;"> ';
 			$htmlData.=$LimitFreeQty.'';
 			$htmlData.='</td>';
-			$htmlData.='<td>';
+			$htmlData.='<td style="text-align:right;">';
 			$htmlData.=$Disc.'';
 			$htmlData.='</td>';
 			
@@ -317,30 +322,32 @@ AND pit.PromNo='$paramPromNo'
 
 		
 
-			  $sqlStepFreeItem="SELECT psft.*,Item.ItemDesc as ItemDesc from PromStepFreeItem  psft
+			  $sqlStepFreeItem="SELECT psft.*,Item.ItemDesc as ItemDesc,Unit.UnitName from PromStepFreeItem  psft
 left join Item on psft.FreeItemCode = Item.ItemCode
-where PromType='DCI'
+inner join Unit on Unit.UnitCode=psft.FreeUnitCode
+where PromType='$PromType'
 AND PromNo='$PromNo'
-AND Step='$Step'";
+AND Step='$Step'
+AND PromCode='$PromCode'";
 
 			 $rsStepFreeItem=odbc_exec($conn,$sqlStepFreeItem);
 			 
 			 $num=odbc_fetch_row($rsStepFreeItem);
 			 if($num){
 			 }else{
-			 $htmlData.='<td>';
+			 $htmlData.='<td  width="30">';
 							
 							$htmlData.='</td>';
 							$htmlData.='<td> ';
 							
 							$htmlData.='</td>';
-							$htmlData.='<td>';
+							$htmlData.='<td width="80">';
 							
 							$htmlData.='</td>';
 							$htmlData.='<td>';
 							
 							$htmlData.='</td> ';
-							$htmlData.='<td>';
+							$htmlData.='<td  width="35">';
 							
 							$htmlData.='</td>';
 						$htmlData.='</tr>';
@@ -351,33 +358,33 @@ AND Step='$Step'";
 			 }else{
 					$i=1;
 					 while (odbc_fetch_row($rsStepFreeItem)) {
-					  $PromType=odbc_result($rsStepFreeItem,"PromType");
-					  $PromNo=odbc_result($rsStepFreeItem,"PromNo");
-					  $PromCode=odbc_result($rsStepFreeItem,"PromCode");
-					  $Step=odbc_result($rsStepFreeItem,"Step");
-					  $FreeItemCode=odbc_result($rsStepFreeItem,"FreeItemCode");
-					  $ItemDesc=odbc_result($rsStepFreeItem,"ItemDesc");
-					  $FreeQty=odbc_result($rsStepFreeItem,"FreeQty");
-					  $FreeUnitCode=odbc_result($rsStepFreeItem,"FreeUnitCode");
+					  $PromType=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"PromType"));
+					  $PromNo=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"PromNo"));
+					  $PromCode=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"PromCode"));
+					  $Step=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"Step"));
+					  $FreeItemCode=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"FreeItemCode"));
+					  $ItemDesc=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"ItemDesc"));
+					  $FreeQty=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"FreeQty"));
+					  $UnitName=iconv("tis-620", "utf-8",odbc_result($rsStepFreeItem,"UnitName"));
 					  
 					 // echo "level 3 FreeItemCode=".$FreeItemCode."<br>";
 					
 						if($i==1){
 							
-							$htmlData.='<td>';
+							$htmlData.='<td width="30" style="text-align:right;">';
 							$htmlData.=$i.'';
 							$htmlData.='</td>';
-							$htmlData.='<td> ';
+							$htmlData.='<td > ';
 							$htmlData.=$FreeItemCode.'';
 							$htmlData.='</td>';
-							$htmlData.='<td>';
+							$htmlData.='<td width="80">';
 							$htmlData.=$ItemDesc.'';
 							$htmlData.='</td>';
-							$htmlData.='<td>';
+							$htmlData.='<td style="text-align:right;">';
 							$htmlData.=$FreeQty.'';
 							$htmlData.='</td> ';
-							$htmlData.='<td>';
-							$htmlData.=$FreeUnitCode.'';
+							$htmlData.='<td width="35">';
+							$htmlData.=$UnitName.'';
 							$htmlData.='</td>';
 						$htmlData.='</tr>';
 							
@@ -386,28 +393,28 @@ AND Step='$Step'";
 							$htmlData.='<tr  style="text-align:left;">';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td width="80">'.''.'</td>';
+								$htmlData.='<td width="30">'.''.'</td>';
+								$htmlData.='<td width="35">'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
 								$htmlData.='<td >'.''.'</td>';
-								$htmlData.='<td >'.''.'</td>';
-								$htmlData.='<td >'.''.'</td>';
-								$htmlData.='<td>';
+								$htmlData.='<td width="30" style="text-align:right;">';
 								$htmlData.=$i.'';
 								$htmlData.='</td>';
 								$htmlData.='<td> ';
 								$htmlData.=$FreeItemCode.'';
 								$htmlData.='</td>';
-								$htmlData.='<td>';
+								$htmlData.='<td width="80">';
 								$htmlData.=$ItemDesc.'';
 								$htmlData.='</td>';
-								$htmlData.='<td>';
+								$htmlData.='<td style="text-align:right;">';
 								$htmlData.=$FreeQty.'';
 								$htmlData.='</td> ';
-								$htmlData.='<td>';
-								$htmlData.=$FreeUnitCode.'';
+								$htmlData.='<td width="35">';
+								$htmlData.=$UnitName.'';
 								$htmlData.='</td>';
 							$htmlData.='</tr>';
 						}
@@ -440,7 +447,7 @@ AND Step='$Step'";
 $htmlcontent='
 <p>
 
-<div class="title" style="text-align:center"><h3>Discount Promotion By Item Report</h3></center>
+<div class="title" style="text-align:center"><h3>'.$titleReport.'</h3></center>
 <div class="date" style="text-align:center">Date :     '.date("Y/m/d H:i:s").'</div>
 
 <table >
@@ -448,21 +455,21 @@ $htmlcontent='
 		<td colspan="6">&nbsp;</td>
 	</tr>
 	<tr>
-		<td>
+		<td width="80">
 			<div style="text-align:left;">
 				<b>
 				Promotion No:
 				</b>
 			</div>
 		</td>
-		<td>
+		<td width="80">
 			<div style="text-align:left;">
 			
 				'.$PromNo.' 
 			</div>
 		</td>
 		
-		<td>
+		<td  width="115">
 			<div style="text-align:left;">
 				<b>
 				Promotion Description:
@@ -478,42 +485,42 @@ $htmlcontent='
 		
 	</tr>
 	<tr>
-		<td>
+		<td width="80">
 			<div style="text-align:left;">
 				<b>
 				Branch:
 				</b>
 			</div>
 		</td>
-		<td colspan="5">
+		<td colspan="5" >
 			<div style="text-align:left;">
-				'.$BranchCode.'
+				'.$branch.'
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td width="80">
 		<div style="text-align:left;">
 			<b>
 			Sales Team:
 			</b>
 		</div>
 		</td>
-		<td colspan="5">
+		<td colspan="5" >
 			<div style="text-align:left;">
-				'.$SalesTeam.'
+				'.$salesTeam.'
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td width="80">
 			<div style="text-align:left;">
 			<b>
 				Shop Type:
 			</b>
 			</div>
 		</td>
-		<td colspan="5">
+		<td colspan="5" >
 			<div style="text-align:left;">
 			'.$shopType.'
 			</div>
@@ -527,19 +534,19 @@ $htmlcontent='
 
 <table border="1">
 	<thead >
-		<tr style="text-align:left; font-weight:bold; border:1px #cccccc solid" >
+		<tr style="text-align:center; font-weight:bold; border:1px #cccccc solid" >
 			<th>
-			<div style="text-align:left;border:1px #cccccc solid;">
+			
 			Item Code
-			</div>
+			
 			</th>
 			<th width="80">
 			Item Description
 			</th>
-			<th>
+			<th width="30">
 			Step
 			</th>
-			<th>
+			<th  width="35">
 			Break
 			</th>
 			<th>
@@ -549,10 +556,10 @@ $htmlcontent='
 			Break By
 			</th>
 			<th>
-			Discount 
+			Discount For
 			</th>
 			<th> 
-			Discount For 
+			Discount  
 			</th>
 			<th> 
 			Limit Free 
@@ -560,19 +567,19 @@ $htmlcontent='
 			<th>
 			Limit Discount 
 			</th>
-			<th>
+			<th  width="30">
 			Seq
 			</th>
 			<th> 
 			Free Item Code
 			</th>
-			<th>
+			<th  width="80">
 			Description 
 			</th>
 			<th>
 			Free Qty
 			</th> 
-			<th>
+			<th  width="35">
 			Unit 
 			</th>
  		</tr>

@@ -1,337 +1,334 @@
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
-
-    <title>Setup Discount Promotion By Group Detail</title>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/blog.css">
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/doc.css">
-<!-- Optional theme -->
-<link rel="stylesheet" href="../bootstrap-3.1.1/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="../bootstrap-3.1.1/js/jquery-2.1.1.min.js"></script>
-<script src="../bootstrap-3.1.1/js/bootstrap.min.js"></script>
-
-
-<style>
-
-.navbar-nav>li>a {
-padding-top: 10px;
-padding-bottom: 10px;
-color:#cdddeb;
+<?php
+$paramPromNo = $_POST['paramPromNo'];
+$paramPromType = $_POST['paramPromType'];
+include_once("../config.php");
+$sql="SELECT * FROM PromHeader WHERE PromNo='$paramPromNo' and PromType='$paramPromType'";
+$rs=odbc_exec($conn,$sql);
+if (!$rs) {
+  exit("Error in SQL");
 }
-
-.navbar-nav>li.active a {
-color:white;
+while (odbc_fetch_row($rs)) {
+  $PromNo=iconv("tis-620", "utf-8",odbc_result($rs,"PromNo"));
+  $PromDesc=iconv("tis-620", "utf-8",odbc_result($rs,"PromDesc"));
 }
-/*
-.navbar-nav>li>a:hover {
-background:#428bca;
-}
-.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
-background-color: #428bca; 
-border-color: #428bca;
-}
-*/
-</style>
-  </head>
+odbc_close($conn);
+?>
 
-  <body>
+<div class="alert alert-warning" role="alert" >
+	<h4>Add Item to Promotion</h4>
+	
+</div>
 
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-         <ul class="nav navbar-nav bg-primary">
-	        <li ><a href="1-1-prod-group-for-prom.html">Product Group for Promotion</a></li>
-	        <li class="dropdown active">
-	          <a href="1-1-prod-group-for-prom.html"class="dropdown-toggle" data-toggle="dropdown">Discount Promotion <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="2-1-setup-discount-prom-by-item.html">Discount Promotion by Item</a></li>
-	            <li><a href="3-1-setup-discount-prom-by-group.html">Discount Promotion by Group</a></li>
-	            <li><a href="3-1-bundle-setup-discount-prom-by-group.html">Discount Promotion by Bundle</a></li>
-	          </ul>
-	        </li>
-	         <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Free Item Promotion <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="4-1-setup-free-item-prom-by-item.html">Free Item Promotion by Item</a></li>
-	            <li><a href="5-1-setup-free-item-prom-by-group.html">Free Item Promotion by Group</a></li>
-	            <li><a href="5-1-bundle-setup-free-item-prom-by-group.html">Free Item Promotion by Bundle</a></li>
-	          </ul>
-	        </li>
-	      </ul>
-        </nav>
-      </div>
-    </div>
 
-    <div class="container">
-<h2>Add Product Group to Promotion Group(DG0908)</h2>
+
 	<div class="row">
-		<div class="col-md-8">
-			<table class="table table-bordered">
-				<tr>
-					<td>Promotion No</td>
-					<td>
-						<b>DG0908</b>
-					</td>
-				</tr>
-				<tr>
-					<td>Promotion Code</td>
-					<td>
+	<!-- form start-->
+	<form id="addItemDiscountProm" name="addItemDiscountProm">
+		<div class="col-md-12">
+			<div class="well">
+				<div class="alert alert-warning" role="alert">
+					<Strong> Add Item to Promotion(<?=$PromNo?>)</Strong>
+				</div>
+				<table>
+					<tr>
+						<td>PromNo</td>
+						<td colspan="2">
+							<b>
+							<div id="paramProNo" style="display:inline;"><?=$PromNo?></div> ,<div id="paramProDesc" style="display:inline;"><?=$PromDesc?></div>
+							</b>
+						</td>
 						
-						<input type="text" />/*Auto Complete Add Group Item*/
-					</td>
-				</tr>
-				<tr>
-					<td>Description</td>
-					<td>
-					<input type="text" readonly="readonly" style="background:#dddddd"/>
-					</td>
+					</tr>
+					
+					
+					<tr>
+						<td>Group Code</td>
+						<td>
+								<div  id="itemCodeArea" style="display:inline">
+								<!--
+									<select id="itemCode" name="itemCode">
+										<option>10101001</option>
+										<option>10101002</option>
+										<option>10101003</option>
+										<option>10101004</option>
+										<option>10101005</option>
+										<option>10101006</option>
+										<option>10101007</option>
+										<option>10101008</option>
+										<option>10101009</option>
+										<option>101010010</option>
+									</select>
+								-->
+								</div>
+						</td>
+						<td id="itemNameArea">
+							<input name="itemName" id="itemName" type="text" />
+							
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<td>Description</td>
+						<td>
+						<input type="text" readonly="readonly" style="background:#dddddd"/>
+						</td>
+							
+					</tr>
+					-->
+					<tr>
+						<td>Break By</td>
+						<td id="breakByArea" colspan="2">
+							<select name="breakBy" id="breakBy" style="height:26px;">
+								<option value="A">A</option>
+								<option value="Q">Q</option>
+								<option value="LA">LA</option>
+								<option value="LQ">LQ</option>
+							</select>
+						(Q-Quantity  A-Amonut LQ-Loop Quantity  LA-Loop Amonut)
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							Discount For
+						</td>
+						<td  id="disCountForArea" colspan="2">
+							<select  name="disCountFor" id="disCountFor" style="height:26px;">
+								<option value="P">P</option>
+								<option value="B">B</option>
+								
 						
-				</tr>
-				
-				<tr>
-					<td>Break By</td>
-					<td>
-						<select>
-							<option>A</option>
-							<option>Q</option>
-							<option>LA</option>
-							<option>LQ</option>
-						</select>
+							</select>
+						
+						(B-Baht P-Percent)
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Limit Free Qty
+						</td>
+						<td colspan="2">
+							<input type="text" name="limitFreeQty" id="limitFreeQty"/>
+							Unit 
+							<div id="unitCodeArea" style="display:inline">
+							<!--<input type="text" name="freeUnitCode" id="freeUnitCode"/>-->
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							Limit Disc Bath
+						</td>
+						<td colspan="2">
+							<input type="text" name="limitDiscBath" id="limitDiscBath"/>
+						</td>
+					</tr>
 					
-					(Q-Quanlity A-Amonut LQ-Loop Quanlity LA-Loop Amonut)
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Discount For
-					</td>
-					<td>
-						<select>
-							<option>B</option>
-							<option>P</option>
-							<option>LB</option>
-							<option>LP</option>
-						</select>
-					
-					B (B-Baht P-Percent LB-Loop Baht LP-Loop Percent)
-					</td>
-				</tr>
-				
-				
-				<tr>
-					<td>
-						Limit Free Qty
-					</td>
-					<td>
-						<input type="text">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Limit Discount Bath
-					</td>
-					<td>
-						<input type="text">
-					</td>
-				</tr>
-			</table>
-			
+				</table>
+				<br style="clear:both">
+				<table>
+					<tr>
+						<td>
+								<input type="button" class="btn btn-primary  btn-xs" id="back" value="back">
+								<input type="hidden"  id="paramAction" name="paramAction" value="add">
+								<input type="submit" class="btn btn-primary  btn-xs" id="submit" value="Add">
+								<input type="reset" class="btn btn-primary  btn-xs" id="cancel" value="Cancel">
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		
+		<!-- form end-->
+	
+	
 	</div>
 	
+
+
+
+
 	
-	
-	
-	
-	<table>
-				<tr>
-					<td>
-					<a href="3-1-setup-discount-prom-by-group.html">
-					<button type="button" class="btn btn-primary btn-xs">Back </button>
-					</a>
-					&nbsp;
-					<button type="button" class="btn btn-primary btn-xs">OK </button>
-					&nbsp;
-					<button type="button" class="btn btn-primary btn-xs">Cancel </button>
-				</td>
-				</tr>
-			</table>
-	<hr>
-	<h2>List of Promotion Group</h2>
+
+
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr >
-						<th>
-						 Promotion Code
-						</th>
-						<th>
-						 Description
-						</th>
-						<th>
-						Break By
-						</th>
-						<th>
-						Discount For
-						</th>
-						<th>
-						LimitFreeQty
-						</th>
-						<th>
-						LimitDiscQty
-						</th>
-						<th>
-						Manage
-						</th>
-					</tr>
-					<tr>
-						<td>
-						G03001 
-						</td>
-						<td>
-						ColaBottle
-						</td>
-						<td>
-						Q
-						</td>
-						<td>
-						B
-						</td>
-						<td>
-						1
-						</td>
-						<td>
-						5
-						</td>
-						
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
-						<a href="3-3-setup-discount-prom-by-group-prom-step.html">
-						<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
-						</a>
-						
-						</td>
-					</tr>
-					<tr>
-						<td>
-						G0401 
-						</td>
-						<td>
-						Classsic 70/150/300
-						</td>
-						<td>
-						B
-						</td>
-						<td>
-						B
-						</td>
-						<td>
-						1
-						</td>
-						<td>
-						5
-						</td>
-						
-						
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
-						<a href="3-3-setup-discount-prom-by-group-prom-step.html">
-						<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
-						
-						</a>
-						
-						</td>
-					</tr>
-					<tr>
-						<td>
-						G26001 
-						</td>
-						<td>
-						Sun Snack Dunk Group
-						</td>
-						<td>
-						Q
-						</td>
-						<td>
-						B
-						</td>
-						<td>
-						1
-						</td>
-						<td>
-						5
-						</td>
-						
-						
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
-						<a href="3-3-setup-discount-prom-by-group-prom-step.html">
-						<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
-						</a>
-						
-						</td>
-					</tr>
-					<tr>
-						<td>
-						G34001 
-						</td>
-						<td>
-						OVO 3 in 1 Snack
-						</td>
-						<td>
-						Q
-						</td>
-						<td>
-						B
-						</td>
-						<td>
-						1
-						</td>
-						<td>
-						5
-						</td>
-						
-						
-						
-						<td>
-						<button type="button" class="btn btn-primary btn-xs">Edit </button>
-						<button type="button" class="btn btn-danger btn-xs">Delete </button>
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
-						<a href="3-3-setup-discount-prom-by-group-prom-step.html">
-						<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
-						</a>
-						
-						</td>
-					</tr>
-				</thead>
-			</table>
+			<div class="well">
+			<div class="alert alert-warning" role="alert">
+				<Strong> List of Promotion Group</Strong>
+			</div>
+
+				<div id="showAllData">
+				
+				<!-- show data-->
+		<!--
+					<table class="table">
+						<thead>
+							<tr >
+								<th>
+								Item code
+								</th>
+								<th>
+								Description
+								</th>
+								<th>
+								Break By
+								</th>
+								<th>
+								Disc For
+								</th>
+								
+								<th>
+								Limit Free Qty
+								</th>
+								<th>
+								Limit Disc Qty
+								</th>
+								<th>
+								Manage
+								</th>
+							</tr>
+							<tr>
+								<td>
+								11130801 
+								</td>
+								<td>
+								 ดารามูโจ้ 18 g ฮ็อดชิลลี
+								</td>
+								<td>
+								Q
+								</td>
+								<td>
+								B
+								</td>
+								<td>
+								1
+								</td>
+								<td>
+								5
+								</td>
+								
+								
+								
+								
+								<td>
+								<button type="button" class="btn btn-primary btn-xs">Edit </button>
+								<button type="button" class="btn btn-danger btn-xs">Delete </button>
+								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
+								<a href="2-3-setup-discount-prom-by-item-prom-step.html">
+								<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
+								</a>
+								
+								</td>
+							</tr>
+							<tr>
+								<td>
+								11130802 
+								</td>
+								<td>
+								 ดารามูโจ้ 70 g ฮ็อดชิลลี
+								</td>
+								<td>
+								Q
+								</td>
+								<td>
+								B
+								</td>
+								<td>
+								1
+								</td>
+								<td>
+								5
+								</td>
+								
+								
+								
+								<td>
+								<button type="button" class="btn btn-primary btn-xs">Edit </button>
+								<button type="button" class="btn btn-danger btn-xs">Delete </button>
+								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
+								<a href="2-3-setup-discount-prom-by-item-prom-step.html">
+								<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
+								</a>
+								
+								</td>
+							</tr>
+							<tr>
+								<td>
+								11130803 
+								</td>
+								<td>
+								15 g สไปชิโนชิ
+								</td>
+								<td>
+								Q
+								</td>
+								<td>
+								B
+								</td>
+								<td>
+								1
+								</td>
+								<td>
+								5
+								</td>
+								
+								
+								<td>
+								<button type="button" class="btn btn-primary btn-xs">Edit </button>
+								<button type="button" class="btn btn-danger btn-xs">Delete </button>
+								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
+								<a href="2-3-setup-discount-prom-by-item-prom-step.html">
+								<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
+								</a>
+								
+								</td>
+							</tr>
+							<tr>
+								<td>
+								11130804 
+								</td>
+								<td>
+								 ดารามูโจ้ 15 g สไปขิโนริ
+								</td>
+								<td>
+								Q
+								</td>
+								<td>
+								B
+								</td>
+								<td>
+								1
+								</td>
+								<td>
+								5
+								</td>
+								
+								
+								
+								<td>
+								<button type="button" class="btn btn-primary btn-xs">Edit </button>
+								<button type="button" class="btn btn-danger btn-xs">Delete </button>
+								<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-viewStep-modal-lg">View Step </button>
+								<a href="2-3-setup-discount-prom-by-item-prom-step.html">
+								<button type="button" class="btn btn-primary btn-xs">Promotion Step </button>
+								</a>
+								
+								</td>
+							</tr>
+						</thead>
+					</table>
+		-->
+
+					</div><!-- show data-->
+			
+			</div>
+
 		</div>
 	</div>
  
 </div>
+
 
   <!-- Start  View Step Large modal -->
 
@@ -341,7 +338,7 @@ border-color: #428bca;
     <div class="modal-content">
        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title" id="myLargeModalLabel">View Step (G03001 ColaBottle)</h4>
+          <h4 class="modal-title" id="myLargeModalLabel">View Step (DI0908 Puriku350 ml)</h4>
         </div>
         <div class="bs-callout bs-callout-info">
 				    <h4>Break By</h4>
@@ -350,14 +347,14 @@ border-color: #428bca;
 						    <table class="table">
 								<thead>
 									<tr>
-										<th>Promotion Code</th>
+										<th>Prom Code</th>
 										<th>Description</th>
-										<th>Mininum SKU</th>
+										<th>Minimum SKU</th>
 										<th>Break Qty</th>
 										<th>Unit</th>
 										<th>Break Amt</th>
-										<th>Discount Per</th>
-										<th>Discount Bath</th>
+										<th>DiscPer</th>
+										<th>Disc Bath</th>
 										
 										
 									</tr>
@@ -365,10 +362,10 @@ border-color: #428bca;
 								<tbody>
 									<tr>
 										<td>
-										G03001
+										11130801
 										</td>
 										<td>
-										ColaBottle
+										ค่ารามูโจ้18gฮ็อดชิลลี
 										</td>
 										<td>
 										2
@@ -384,16 +381,13 @@ border-color: #428bca;
 										
 										</td>
 										<td>
-										
-										</td>
-										<td>
 										6
 										</td>
-									
+										<td>
 										
+										</td>
+																
 									</tr>
-									
-									
 									
 								</tbody>
 							</table>
@@ -413,6 +407,7 @@ border-color: #428bca;
 				          		
 				          		<th>Free Item Code</th>
 				          		<th>Description</th>
+				          		
 				          		<th>Free Qty</th>
 				          		<th>Unit</th>
 				          		<th>Gl Account</th>
@@ -420,7 +415,7 @@ border-color: #428bca;
 				          		
 				          	</tr>
 			          	</thead>
-			          	<tbod>
+			          	<tbody>
 			          		<tr>
 			          			
 			          			<td>01010006</td>
@@ -448,7 +443,7 @@ border-color: #428bca;
 			          			<td></td>
 			          			
 			          		</tr>
-			          	</tbod>
+			          	</tbody>
 			          </table>
 			</div>
 			
@@ -466,29 +461,30 @@ border-color: #428bca;
 									<tr>
 										<th>Prom Code</th>
 										<th>Description</th>
-										<th>Minumum SKU</th>
+										<th>Minimum SKU</th>
 										<th>Break Qty</th>
 										<th>Unit</th>
 										<th>Break Amt</th>
-										<th>DiscPer</th>
+										<th>Disc Per</th>
 										<th>Disc Bath</th>
+										
 										
 										
 									</tr>
 								</thead>
-								<tbody>
+								<tbodyy>
 									<tr>
 										<td>
-										G03001
+										11130801
 										</td>
 										<td>
-										ColaBottle
+										ค่ารามูโจ้18gฮ็อดชิลลี
 										</td>
 										<td>
 										2
 										</td>
 										<td>
-										4
+										1
 										</td>
 										
 										<td>
@@ -502,7 +498,7 @@ border-color: #428bca;
 										
 										</td>
 										<td>
-										10
+										6
 										</td>
 									
 										
@@ -510,7 +506,7 @@ border-color: #428bca;
 									
 									
 									
-								</tbody>
+								</tbodyy>
 							</table>
 				    	</div>
 				    </div>
@@ -581,15 +577,4 @@ border-color: #428bca;
 </div>
 <!-- End View Step Large modal -->   
 
-    	<div class="blog-footer">
-	      <p>Smart Van BackOffice</p>
-	      <p>
-	        <a href="#">Back to top</a>
-	      </p>
-	    </div>
 
-
-
-   
-  </body>
-</html>

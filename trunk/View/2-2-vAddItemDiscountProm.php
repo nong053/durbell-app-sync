@@ -8,19 +8,16 @@ if (!$rs) {
   exit("Error in SQL");
 }
 while (odbc_fetch_row($rs)) {
-  $PromNo=odbc_result($rs,"PromNo");
-  $PromDesc=odbc_result($rs,"PromDesc");
+  $PromNo=iconv("tis-620", "utf-8",odbc_result($rs,"PromNo"));
+  $PromDesc=iconv("tis-620", "utf-8",odbc_result($rs,"PromDesc"));
 }
 odbc_close($conn);
 ?>
 
-<div class="bs-callout bs-callout-info">
-	<h4>Add Item to Promotion</h4>
-	<p>
-	Note here... <br>
-	</p>
+<div class="alert alert-warning" role="alert" >
+	<h4>Setup Discount Promotion By Item </h4>
+	
 </div>
-
 
 
 	<div class="row">
@@ -33,7 +30,7 @@ odbc_close($conn);
 				</div>
 				<table>
 					<tr>
-						<td>PromNo</td>
+						<td>Promotion No</td>
 						<td colspan="2">
 							<b>
 							<div id="paramProNo" style="display:inline;"><?=$PromNo?></div> ,<div id="paramProDesc" style="display:inline;"><?=$PromDesc?></div>
@@ -60,7 +57,7 @@ odbc_close($conn);
 					
 					<tr>
 						<td>Item Code</td>
-						<td>
+						<td  colspan="2">
 								<div  id="itemCodeArea" style="display:inline">
 								<!--
 									<select id="itemCode" name="itemCode">
@@ -77,11 +74,11 @@ odbc_close($conn);
 									</select>
 								-->
 								</div>
+								<div id="itemNameArea"  style="display:inline">
+									<input name="itemName" id="itemName" type="text"/>
+								</div>
 						</td>
-						<td id="itemNameArea">
-							<input name="itemName" id="itemName" type="text" />
-							
-						</td>
+						
 					</tr>
 					<!--
 					<tr>
@@ -101,7 +98,7 @@ odbc_close($conn);
 								<option value="LA">LA</option>
 								<option value="LQ">LQ</option>
 							</select>
-						(Q-Quanlity A-Amonut LQ-Loop Quanlity LA-Loop Amonut)
+						(Q-Quantity  A-Amonut LQ-Loop Quantity  LA-Loop Amonut)
 						</td>
 					</tr>
 					<tr>
@@ -133,7 +130,7 @@ odbc_close($conn);
 					</tr>
 					<tr>
 						<td>
-							Limit Disc Bath
+							Limit Discount Bath
 						</td>
 						<td colspan="2">
 							<input type="text" name="limitDiscBath" id="limitDiscBath"/>
@@ -145,7 +142,7 @@ odbc_close($conn);
 				<table>
 					<tr>
 						<td>
-								<input type="button" class="btn btn-primary  btn-xs" id="back" value="back">
+								<input type="button" class="btn btn-primary  btn-xs" id="back" value="Back">
 								<input type="hidden"  id="paramAction" name="paramAction" value="add">
 								<input type="submit" class="btn btn-primary  btn-xs" id="submit" value="Add">
 								<input type="reset" class="btn btn-primary  btn-xs" id="cancel" value="Cancel">

@@ -23,22 +23,10 @@
 <script src="../bootstrap-3.1.1/js/bootstrap.min.js"></script>
 
 
-
-<link rel="stylesheet" type="text/css" href="../jquery-ui-multiselect/jquery.multiselect.css" />
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../jquery-ui-multiselect/src/jquery.multiselect.js"></script>
-
-
 <style>
 
 
-<script>
-$(document).ready(function(){
-	$(".mutiSelect").multiselect();
-	$(".date").datepicker();
-});
-</script>
+
 .navbar-nav>li.active a {
 color:white;
 }
@@ -60,7 +48,7 @@ border-color: #428bca;
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-         <ul class="nav navbar-nav bg-primary">
+          <ul class="nav navbar-nav bg-primary">
 	        <li ><a href="1-1-prod-group-for-prom.html">Product Group for Promotion</a></li>
 	        <li class="dropdown active">
 	          <a href="1-1-prod-group-for-prom.html"class="dropdown-toggle" data-toggle="dropdown">Discount Promotion <b class="caret"></b></a>
@@ -89,22 +77,23 @@ border-color: #428bca;
 		<div class="col-md-8">
 			<table class="table table-bordered">
 				<tr>
-					<td>Promotion No</td>
+					<td>Prom No</td>
 					<td>
 						
-						<input text="text" name="promotionNo"  value="DG0908"/>
+						<input text="text" name="promotionNo"  value="DI520301"/>
 						&nbsp;
-						<input text="text" name="promotionName" value="Colo KRMC"/>
+						<input text="text" name="promotionName" value="Tea & Star Promo"/>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Promotion Code
+						Prom Code
 					</td>
 					<td>
 						<input type="text" name="itemCode" value="G03001">
 						&nbsp;
 						<input type="text" name="itemName" value="ColaBottle">
+						/*เลือก PromCode*/
 					</td>
 				</tr>
 			
@@ -115,7 +104,7 @@ border-color: #428bca;
 						Q
 							
 					
-						(Q-Quanlity A-Amonut LQ-Loop Quanlity LA-Loop Amonut)
+						(Q-Quantity  A-Amonut LQ-Loop Quantity  LA-Loop Amonut)
 					</td>
 				</tr>
 				<tr>
@@ -123,11 +112,20 @@ border-color: #428bca;
 						Discount For
 					</td>
 					<td>
-						
-							B
 							
-						 (B-Bath P-Percent LB-Loop Bath LP-Loop Percent)
+					B
+						(B-Baht P-Percent LB-Loop Baht LP-Loop Percent)
 						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Step
+					</td>
+					<td>
+					
+						<input type="text" >	
+					
 					</td>
 				</tr>
 				<tr>
@@ -135,12 +133,15 @@ border-color: #428bca;
 						Promotion Step Note
 					</td>
 					<td>
-						<textarea id="note" rows="5" cols="50"></textarea>
+					
+						<textarea></textarea>	
+					
 					</td>
-				</tr>	
+				</tr>
+				
 				<tr>
 					<td>
-						Minimum SKU 
+						Minimum SKU
 					</td>
 					<td>
 					
@@ -149,18 +150,17 @@ border-color: #428bca;
 					</td>
 				</tr>
 				
+				
 			</table>
 			
 		</div>
 		
 	</div>
-	<hr>
-	
-	<h3>Break By</h3>
+<h3>Break By</h3>
 	<div class="row">
-	<div class="col-md-8">
-	<table class="table table-bordered">
-		<tr>
+		<div class="col-md-8">
+			<table class="table table-bordered">
+				<tr>
 			<td>Break Quantity</td>
 			<td>
 			<input type="text">
@@ -189,41 +189,21 @@ border-color: #428bca;
 			
 			
 		</tr>
-		
-		<tr style="display:none">
-			<td>Break Amount</td>
-			<td>
-			<input type="text" value="0.00">
-			</td>
-		</tr>
-		
-	</table >
-	</div>
+				<tr style="display:none">
+					<td>Break Amount</td>
+					<td>
+					<input type="text" value="0.00">
+					</td>
+				</tr>
+			</table >
+		</div>
 	</div>
 	
-	<h3>Discount</h3>
-	<div class="row">
-	<div class="col-md-6">
-	<table class="table table-bordered">
-		
-		<tr style="display:none">
-			<td>Disc Percent</td>
-			<td><input type="text" name="disc"></td>
-		</tr>
-		<tr>
-			<td>Disc Bath</td>
-			<td><input type="text" name="discBath"></td>
-		</tr>
-		
-	</table>
-	</div>
-	</div>
 	
-
 	<table>
 		<tr>
 			<td>
-				<a href="3-2-setup-discount-prom-by-group-detail.html">
+				<a href="3-1-bundle-setup-discount-prom-by-group.html">
 				<button type="button" class="btn btn-primary btn-xs">back </button>
 				</a>
 				<button type="button" class="btn btn-primary btn-xs">Add </button>
@@ -232,136 +212,86 @@ border-color: #428bca;
 			
 		</tr>
 	</table>
+	
+
 	<hr>
-	<h2>List of Promotion Step</h2>
 	
 	
-	<table class="table table-bordered">
+	<h2>List of Step Free Item</h2>
+	
+	
+	<table class="table">
 		<thead>
 			<tr>
-				
-				<th>Prom No</th>
-				<th>Prom Description</th>
-				<th>Promo Code</th>
+				<th>Promotion No</th>
+				<th>Promotion Description</th>
+				<th>Promotion Code</th>
 				<th>Description</th>
 				<th>Break Qty</th>
 				<th>Unit</th>
 				<th>Break Amount</th>
-				<th>Discount Per</th>
-				<th>Discount Bath</th>
 				<th>Manage</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
+				
 				<td>
-				DG0908
+				DI520301
 				</td>
 				<td>
-				Colo KRMC
+				Tea & Star Promo
 				</td>
 				<td>
 				G03001
 				</td>
 				<td>
 				ColaBottle
-				</td>
-				<td>
-				2
-				</td>
-				<td>
-				Pack
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				6
-				</td>
-				<td>
-					<button type="button" class="btn btn-primary btn-xs">Edit </button>
-					<button type="button" class="btn btn-danger btn-xs">Delete </button>
-					<a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
-					<button type="button" class="btn btn-primary btn-xs">Free Item </button>
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				DG0908
-				</td>
-				<td>
-				Colo KRMC
-				</td>
-				<td>
-				G03001
-				</td>
-				<td>
-				ColaBottle
-				</td>
-				<td>
-				4
-				</td>
-				<td>
-				Pack
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				10
-				</td>
-				<td>
-					<button type="button" class="btn btn-primary btn-xs">Edit </button>
-					<button type="button" class="btn btn-danger btn-xs">Delete </button>
-					<a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
-					<button type="button" class="btn btn-primary btn-xs">Free Item </button>
-					</a>
-				</td>
-			</tr>
-			<tr>
-			
-				<td>
-				DG0908
-				</td>
-				<td>
-				Colo KRMC
-				</td>
-				<td>
-				G03001
-				</td>
-				<td>
-				ColaBottle
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				
-				</td>
-				<td>
-				500
 				</td>
 				<td>
 				1
 				</td>
-				<td>
 				
+				<td>
+				Pack
 				</td>
+				<td></td>
 				<td>
 					<button type="button" class="btn btn-primary btn-xs">Edit </button>
 					<button type="button" class="btn btn-danger btn-xs">Delete </button>
-					<a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
-					<button type="button" class="btn btn-primary btn-xs">Free Item </button>
-					</a>
+					
 				</td>
 			</tr>
+			<tr>
+				
+				<td>
+				DI520301
+				</td>
+				<td>
+				Tea & Star Promo
+				</td>
+				
+				<td>
+				G03002
+				</td>
+				<td>
+				ColaBottle2
+				</td>
+				<td>
+				1
+				</td>
+				
+				<td>
+				Pack
+				</td>
+				<td></td>
+				<td>
+					<button type="button" class="btn btn-primary btn-xs">Edit </button>
+					<button type="button" class="btn btn-danger btn-xs">Delete </button>
+					
+				</td>
+			</tr>
+			
 			
 		</tbody>
 	</table>
@@ -392,7 +322,6 @@ border-color: #428bca;
 				    			<th>Prom Group code</th>
 				    			<th>Prom Group Desc</th>
 				    			<th>Product Group Code</th>
-				    			<th>Step</th>
 				    			<th>Product Group Desc</th>
 				    			<th>Break By</th>
 				    			<th>Discount For</th>
@@ -403,9 +332,8 @@ border-color: #428bca;
 					    		<td>DG0908</td>
 					    		<td>Colo KRMC</td>
 					    		<td>G03001</td>
-					    		<td>1</td>
 					    		<td>ColaBottle</td>
-					    		<td>Q</td>
+					    		<td>B</td>
 					    		<td>B</td>
 					    	</tr>
 					    	
@@ -425,7 +353,7 @@ border-color: #428bca;
 		          	<tr>
 		          		<td>Brand Product</td>
 		          		<td>
-		          			<select class="mutiSelect">
+		          			<select>
 		          				<option>Brand01</option>
 		          				<option>Brand02</option>
 		          			</select>
@@ -471,7 +399,7 @@ border-color: #428bca;
             <button type="button" class="btn btn-primary btn-xs">Add </button>
 			<button type="button" class="btn btn-danger btn-xs">Cancle </button>
           <hr>
-          <h2>List of Step Free Item</h2>
+          <h2>Detail Free Item</h2>
           <table class="table">
           	<thead>
 	          	<tr>

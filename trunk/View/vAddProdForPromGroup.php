@@ -13,18 +13,16 @@ if (!$rs) {
   exit("Error in SQL");
 }
 while (odbc_fetch_row($rs)) {
-  $GroupCode=odbc_result($rs,"GroupCode");
-  $GroupDesc=odbc_result($rs,"GroupDesc");
+  $GroupCode=iconv("tis-620", "utf-8",odbc_result($rs,"GroupCode"));
+  $GroupDesc=iconv("tis-620", "utf-8",odbc_result($rs,"GroupDesc"));
 }
 odbc_close($conn);
 ?>
 
 
-<div class="bs-callout bs-callout-info">
-	<h4>Add Item of Group</h4>
-	<p>
-ส่วนของการเพิ่มและแก้ไขข้อมูล Item of Group <br>
-	</p>
+<div class="alert alert-warning" role="alert" >
+	<h4>Promotion Group</h4>
+	
 </div>
 
 
@@ -86,7 +84,7 @@ odbc_close($conn);
 							Minimum Order
 							</td>
 							<td colspan="3">
-								<input id="minimum"  name="minimum" type="text" size="4" name="minimum"/>
+								<input id="minimum"  name="minimum" type="text" size="4" name="minimum" value="0"/>
 							
 								Unit
 							
@@ -109,7 +107,7 @@ odbc_close($conn);
 							<td>
 
 								<!--<input type="button"  class="btn btn-primary  btn-xs" id="ShowHide" value="Show/Hide">-->
-								<input type="button" class="btn btn-primary  btn-xs" id="back" value="back">
+								<input type="button" class="btn btn-primary  btn-xs" id="back" value="Back">
 								<input type="hidden"  id="paramAction" name="paramAction" value="add">
 								<input type="submit" class="btn btn-primary  btn-xs" id="submit" value="Add">
 								<input type="reset" class="btn btn-primary  btn-xs" id="cancel" value="Cancel">

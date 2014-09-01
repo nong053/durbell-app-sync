@@ -13,11 +13,13 @@ LimitFreeQty
 FreeUnitCode
 LimitDiscBaht
 */
-$sql="SELECT pi.*,ph.PromDesc as PromDesc ,Item.ItemDesc
-FROM PromItem pi 
-inner join PromHeader ph on pi.PromNo=ph.PromNo
-inner join Item on pi.PromCode=Item.ItemCode
-WHERE pi.PromNo='$paramPromNo' and pi.PromType='$paramPromType' and pi.PromCode='$paramPromCode'";
+$sql="select PromItem.*,PromGroup.GroupDesc as ItemDesc,PromHeader.PromDesc as PromDesc
+ from PromItem 
+inner join PromGroup 
+on PromItem.PromCode=PromGroup.GroupCode
+inner join PromHeader 
+on PromItem.PromType=PromHeader.PromType
+WHERE PromItem.PromNo='$paramPromNo' and PromItem.PromType='$paramPromType' and PromItem.PromCode='$paramPromCode'";
 
 
 $sqlCountRows="SELECT max(Step) as countRows
@@ -47,19 +49,24 @@ odbc_close($conn);
 
 
 
-<div class="alert alert-warning" role="alert" >
-	<h4>Setup Discount Promotion By Item </h4>
-	
-</div>
 
 
+
+
+	<!--<div class="bs-callout bs-callout-info">-->
+	<div class="alert alert-warning" role="alert" >
+		<h3>Promotion Step</h3>
+	</div>
+	<!--</div>-->
 
 
 	<form id="addStepDiscountProm" name="addStepDiscountProm">
 	<div class="row">
 
 		<div class="col-md-12">
+				
 			<div class="well">
+				
 				<div class="alert alert-warning" role="alert">
 					<Strong> Add Promotion Step</Strong>
 				</div>
@@ -95,7 +102,7 @@ odbc_close($conn);
 						<td  colspan="4">
 							<b><?=$BreakBy?></b>
 							
-							(Q-Quanlity A-Amonut LQ-Loop Quanlity LA-Loop Amonut)
+							(Q-Quantity  A-Amonut LQ-Loop Quantity  LA-Loop Amonut)
 						</td>
 					</tr>
 					<tr>
@@ -117,13 +124,13 @@ odbc_close($conn);
 						</td>
 						<td  colspan="4">
 						
-							<input  class="inputData" type="text" id="Step" name="Step"  size="3" value="<?=$countRows+1?>" readonly="readonly"  style="background:#f5f5f5">	
+							<input  class="inputData" type="text" id="Step" name="Step" value="<?=$countRows+1?>" readonly="readonly"  style="background:#f5f5f5">	
 						
 						</td>
 					</tr>
 					<tr>
 						<td>
-							Promotion Step Note<font color="red">*</font>
+							Promotion Step Note
 						</td>
 						<td  colspan="4">
 						
@@ -176,7 +183,7 @@ odbc_close($conn);
 								
 								<td>Break Quantity Factory</td>
 								<td>
-								<input  class="inputData" type="text" id="BreakUnitFactor" name="BreakUnitFactor" value="0" readonly="readonly"  style="background:#f5f5f5" size="3">
+								<input  class="inputData" type="text" id="BreakUnitFactor" name="BreakUnitFactor" value="0" readonly="readonly"  style="background:#f5f5f5">
 								</td>
 							</tr>
 						<?php
@@ -221,7 +228,7 @@ odbc_close($conn);
 					<tr>
 						<td>
 						<br>
-							<input type="button" class="btn btn-primary  btn-xs" id="back" value="Back">
+							<input type="button" class="btn btn-primary  btn-xs" id="back" value="back">
 							<input type="hidden"  id="paramAction" name="paramAction" value="add">
 							<input type="submit" class="btn btn-primary  btn-xs" id="submit" value="Add">
 							<input type="reset" class="btn btn-primary  btn-xs" id="cancel" value="Cancel">
@@ -594,20 +601,16 @@ odbc_close($conn);
 		          		<td>Free Unit Factor </td>
 		          		<td>
 		          			<div >
-								<input id="FreeUnitFactor" type="text" size="3" style="background:#f5f5f5 " value="1"  >
+								<input id="FreeUnitFactor" type="text" size="20" style="background:#f5f5f5 " value="1">
 							</div>
 		          		</td>
 		          	</tr>
 		          	<tr>
 		          		<td>GL Account</td>
 		          		<td>
-
-		          			<input type="text" size="20" id="GLAccount" name="GLAccount" value="A">
-							<input type="hidden" size="20" id="Seq" name="Seq">
-
+		          			<input type="text" size="20" id="GLAccount" name="GLAccount">
 		          		</td>
 		          	</tr>
-					
 		          </table>
 	          </div>
           </div>

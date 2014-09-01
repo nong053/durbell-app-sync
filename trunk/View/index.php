@@ -63,8 +63,37 @@
 <script type="text/javascript" src="../Controller/main.js"></script>
 <!-- include js start-->
 
-  </head>
+<style>
+.bs-callout {
+    margin: 10px 0;
+    padding: 12px;
+}
+.well{
+	margin-bottom: 5px;*
+	padding:5px;
+	padding-top:2px;
 
+}
+h3{
+	margin:2px;
+}
+h4{
+	margin:2px;
+}
+.alert{
+	margin-top:0px;
+}
+.blog-masthead{
+	margin-bottom: 5px;
+}
+table tr td{
+vertical-align: top;
+}
+.container {
+    width: 1100px;
+}
+</style>
+</head>
   <body>
 
     <div class="blog-masthead">
